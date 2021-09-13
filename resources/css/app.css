@@ -1,3 +1,24 @@
+@import '~@fortawesome/fontawesome-free/css/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/regular';
+@import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/brands';
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.button {
+    @apply shadow-md py-3 px-6 rounded-md transition duration-300
+}
+
+.button-purple {
+    @apply bg-bookmark-purple text-white hover:bg-bookmark-white hover:text-black
+}
+
+.button-white {
+    @apply bg-bookmark-white hover:bg-bookmark-purple hover:text-white
+}
+
+.button-red {
+    @apply bg-bookmark-red text-white hover:bg-bookmark-white hover:text-black
+}
