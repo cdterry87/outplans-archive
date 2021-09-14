@@ -1,3 +1,13 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+.button {
+    @apply inline-block rounded-full w-auto px-8 py-4 font-bold border-gray-200 shadow-xl
+}
+
+.button-black {
+    @apply bg-black text-white hover:bg-white hover:text-black
+}
