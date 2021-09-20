@@ -39,8 +39,11 @@ Route::middleware('auth')->group(function () {
     // Note: a plan is only viewable if it is public or if the user was invited or if the user is a friend (but only if it's not invite only)
     Route::resource('plans', PlanController::class);
 
+    // Shows the plans this user is invited to by their friends
+    Route::get('invites', [UserController::class, 'invites'])->name('invites');
+
     // Shows plans that were attended so they can be rated.  Users can get points based on how high their plans are rated
-    Route::get('attended', [PlanController::class, 'attended'])->name('attended');
+    Route::get('attended', [UserController::class, 'attended'])->name('attended');
 
     // user profiles are only viewable if public or if the user viewing is a friend
     Route::get('user/{id}', [PublicController::class, 'user'])->name('user');

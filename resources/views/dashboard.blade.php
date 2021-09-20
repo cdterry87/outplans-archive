@@ -16,6 +16,12 @@
                         </a>
                     </div>
                     <div class="mx-4 border-b-2">
+                        <a href="/invites" class="block w-full h-full py-4 hover:text-blue-700">
+                            <i class="fas fa-envelope-open-text"></i>
+                            Invites
+                        </a>
+                    </div>
+                    <div class="mx-4 border-b-2">
                         <a href="/attended" class="block w-full h-full py-4 hover:text-blue-700">
                             <i class="fas fa-history"></i>
                             Attended
@@ -29,7 +35,7 @@
                     </div>
                     <div class="mx-4">
                         <a href="/messages" class="block w-full h-full py-4 hover:text-blue-700">
-                            <i class="fas fa-envelope-open-text"></i>
+                            <i class="fas fa-envelope"></i>
                             Messages
                         </a>
                     </div>
