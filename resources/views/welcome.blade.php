@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-header />
 
-    <div class="relative items-center justify-center w-full max-w-6xl px-8 py-12 mx-auto overflow-x-hidden lg:py-32">
+    <div class="relative items-center justify-center w-full max-w-6xl py-12 mx-auto overflow-x-hidden lg:py-32">
         <div class="container flex flex-col items-center">
             <h1 class="relative mb-4 text-3xl font-black leading-tight text-center text-gray-900 sm:text-6xl xl:mb-8">
                 Start Making Plans!

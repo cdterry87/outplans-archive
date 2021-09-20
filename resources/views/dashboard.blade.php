@@ -1,10 +1,42 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+    <div class="relative items-center justify-center w-full max-w-6xl py-6 mx-auto">
+        <div class="flex gap-3">
+            <div class="w-64">
+                <div class="h-full bg-gray-100 rounded-md shadow-md">
+                    <div class="mx-4 border-b-2">
+                        <a href="/dashboard" class="block w-full h-full py-4 hover:text-blue-700">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </a>
+                    </div>
+                    <div class="mx-4 border-b-2">
+                        <a href="/plans" class="block w-full h-full py-4 hover:text-blue-700">
+                            <i class="fas fa-calendar-alt"></i>
+                            Plans
+                        </a>
+                    </div>
+                    <div class="mx-4 border-b-2">
+                        <a href="/attended" class="block w-full h-full py-4 hover:text-blue-700">
+                            <i class="fas fa-history"></i>
+                            Attended
+                        </a>
+                    </div>
+                    <div class="mx-4 border-b-2">
+                        <a href="/friends" class="block w-full h-full py-4 hover:text-blue-700">
+                            <i class="fas fa-user-friends"></i>
+                            Friends
+                        </a>
+                    </div>
+                    <div class="mx-4">
+                        <a href="/messages" class="block w-full h-full py-4 hover:text-blue-700">
+                            <i class="fas fa-envelope-open-text"></i>
+                            Messages
+                        </a>
+                    </div>
                 </div>
+            </div>
+            <div>
+                Dashboard container
             </div>
         </div>
     </div>

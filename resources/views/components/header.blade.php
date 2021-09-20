@@ -1,5 +1,5 @@
 <header class="relative z-50 w-full h-24">
-    <div class="container flex items-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0">
+    <div class="container flex items-center h-full max-w-6xl mx-auto sm:justify-between">
         <a href="/" class="relative flex items-center h-full font-black leading-none">
             <span class="ml-3 text-4xl text-gray-800">Eleplans</span>
         </a>
