@@ -38276,7 +38276,7 @@ select {
 .button-black:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-  --tw-gradient-to: #e5e7eb;
+  --tw-gradient-to: #f3f4f6;
 }
 
 .button-black {
