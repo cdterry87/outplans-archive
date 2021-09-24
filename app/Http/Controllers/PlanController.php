@@ -10,4 +10,9 @@ class PlanController extends Controller
     {
         return view('dashboard');
     }
+
+    public function index()
+    {
+        return view('dashboard');
+    }
 }
