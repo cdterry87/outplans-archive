@@ -1,7 +1,7 @@
 <header class="relative z-50 w-full h-24">
     <div class="container flex items-center h-full max-w-6xl mx-auto sm:justify-between">
         <a href="/" class="relative flex items-center h-full font-black leading-none">
-            <span class="ml-3 text-4xl text-gray-800">Eleplans</span>
+            <span class="ml-3 text-4xl text-gray-800">{{ config('app.name', 'Laravel') }}</span>
         </a>
         <div
             class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">

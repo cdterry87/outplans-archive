@@ -2,7 +2,7 @@
     <div class="container flex flex-col justify-between max-w-6xl mx-auto mt-6 overflow-hidden lg:flex-row">
         <p class="text-base text-center text-gray-500 lg:text-left">
             <a href="/" class="flex justify-start mb-6 text-xl font-bold text-left sm:text-center lg:text-left sm:justify-center lg:justify-start">
-                Eleplans
+                {{ config('app.name', 'Laravel') }}
             </a>
             Simplifying the way you make plans!
         </p>
@@ -18,5 +18,5 @@
         <a href="https://twitter.com" class="hover:text-gray-700"><i class="fab fa-twitter"></i></a>
         <a href="https://instagram.com" class="hover:text-gray-700"><i class="fab fa-instagram"></i></a>
     </div>
-    <div class="pt-6 mt-10 text-center text-gray-400 border-t border-gray-100">&copy; Eleplans 2021</div>
+    <div class="pt-6 mt-10 text-center text-gray-400 border-t border-gray-100">&copy; {{ config('app.name', 'Laravel') }} 2021</div>
 </footer>
