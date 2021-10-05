@@ -24,7 +24,7 @@ class CreatePlansTable extends Migration
             $table->text('description');
             $table->timestamp('when');
             $table->timestamp('published')->nullable(); // null (default) = not published
-            $table->string('status'); // friends only (default), invite only, public
+            $table->string('status')->default('F'); // F = friends only (default), I = invite only, P = public
             $table->timestamps();
         });
     }
