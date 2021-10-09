@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Message;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PlanFactory extends Factory
+class MessageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Plan::class;
+    protected $model = Message::class;
 
     /**
      * Define the model's default state.
@@ -24,11 +25,8 @@ class PlanFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'title' => $this->faker->text(),
-            'location' => $this->faker->text(),
-            'description' => $this->faker->text(),
-            'when' => now(),
-            'published' => now()
+            'plan_id' => 1,
+            'message' => $this->faker->text()
         ];
     }
 }
