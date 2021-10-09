@@ -19,6 +19,10 @@ class CreatePlansInvitesTable extends Migration
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('invited_user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('plan_id')
                 ->constrained('plans')
                 ->onUpdate('cascade')

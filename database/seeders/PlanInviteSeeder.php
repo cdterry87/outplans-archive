@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\PlanInvite;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class PlanInviteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+        PlanInvite::factory(10)->create();
     }
 }

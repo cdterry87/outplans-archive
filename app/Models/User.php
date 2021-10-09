@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Friend;
+use App\Models\FriendInvite;
+use App\Models\Message;
+use App\Models\Plan;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Plan;
 
 class User extends Authenticatable
 {
@@ -46,5 +49,20 @@ class User extends Authenticatable
     public function plans()
     {
         return $this->hasMany(Plan::class);
+    }
+
+    public function friends()
+    {
+        return $this->hasMany(Friend::class);
+    }
+
+    public function friends_invites()
+    {
+        return $this->hasMany(FriendInvite::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }

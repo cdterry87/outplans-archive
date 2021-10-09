@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\FriendInvite;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class FriendInviteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+        FriendInvite::factory(10)->create();
     }
 }
