@@ -10,6 +10,6 @@ class MessageController extends Controller
     {
         $messages = auth()->user()->messages()->get();
 
-        return view('dashboard', compact(['messages']));
+        return view('messages', compact(['messages']));
     }
 }

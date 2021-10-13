@@ -11,6 +11,6 @@ class FriendController extends Controller
         $friends = auth()->user()->friends()->get();
         $invites = auth()->user()->friends_invites()->get();
 
-        return view('dashboard', compact(['friends', 'invites']));
+        return view('friends', compact(['friends', 'invites']));
     }
 }

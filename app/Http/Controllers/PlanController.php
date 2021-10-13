@@ -19,7 +19,7 @@ class PlanController extends Controller
     {
         $plans = auth()->user()->plans()->get();
 
-        return view('dashboard', compact(['plans']));
+        return view('plans', compact(['plans']));
     }
 
     public function invites()
@@ -27,13 +27,13 @@ class PlanController extends Controller
         $received = auth()->user()->plans_invited()->get();
         $sent = auth()->user()->plans_invites()->get();
 
-        return view('dashboard', compact(['received', 'sent']));
+        return view('invites', compact(['received', 'sent']));
     }
 
     public function attended()
     {
         $attended = auth()->user()->plans_attended()->get();
 
-        return view('dashboard', compact(['attended']));
+        return view('attended', compact(['attended']));
     }
 }
