@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // home should show some random public events, describe the site, big hero, and a footer
 // Route::get('/', [PublicController::class, 'home'])->name('home');
@@ -40,10 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('plans', PlanController::class);
 
     // Shows the plans this user is invited to by their friends
-    Route::get('invites', [UserController::class, 'invites'])->name('invites');
+    Route::get('invites', [PlanController::class, 'invites'])->name('invites');
 
     // Shows plans that were attended so they can be rated.  Users can get points based on how high their plans are rated
-    Route::get('attended', [UserController::class, 'attended'])->name('attended');
+    Route::get('attended', [PlanController::class, 'attended'])->name('attended');
 
     // user profiles are only viewable if public or if the user viewing is a friend
     Route::get('user/{id}', [PublicController::class, 'user'])->name('user');
