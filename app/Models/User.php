@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Friend;
-use App\Models\FriendInvite;
-use App\Models\Message;
+use Carbon\Carbon;
 use App\Models\Plan;
+use App\Models\Friend;
+use App\Models\Message;
+use App\Models\FriendInvite;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -51,14 +53,76 @@ class User extends Authenticatable
         return $this->hasMany(Plan::class);
     }
 
+    public function plans_invites()
+    {
+        return DB::table('plans')
+            ->select(
+                'plans.*',
+                'plans_invites.invited_user_id',
+                'users.name',
+                'users.email'
+            )
+            ->join('plans_invites', 'plans_invites.plan_id', '=', 'plans.id')
+            ->join('users', 'users.id', '=', 'plans_invites.invited_user_id')
+            ->where('plans_invites.user_id', '=', auth()->user()->id);
+    }
+
+    public function plans_invited()
+    {
+        return DB::table('plans')
+            ->select(
+                'plans.*',
+                'users.name as invited_by',
+                'plans_invites.user_id',
+            )
+            ->join('plans_invites', 'plans_invites.plan_id', '=', 'plans.id')
+            ->join('users', 'users.id', '=', 'plans_invites.user_id')
+            ->where('plans_invites.invited_user_id', '=', auth()->user()->id);
+    }
+
+    public function plans_upcoming()
+    {
+        // Get plans that I am invited to and the `when` date is in the future
+        // Join on attended table to display your attending status
+    }
+
+    public function plans_attended()
+    {
+        return DB::table('plans')
+            ->select(
+                'plans.*',
+                'plans_attendees.status'
+            )
+            ->join('plans_attendees', 'plans_attendees.plan_id', '=', 'plans.id')
+            ->where('plans_attendees.status', '=', 'A')
+            ->where('plans_attendees.user_id', '=', auth()->user()->id)
+            ->where('plans.when', '<', Carbon::now());
+    }
+
     public function friends()
     {
-        return $this->hasMany(Friend::class);
+        return DB::table('users')
+            ->select(
+                'users.id',
+                'users.name',
+                'users.email',
+                'users.created_at'
+            )
+            ->join('friends', 'friends.friend_user_id', 'users.id')
+            ->where('friends.user_id', '=', auth()->user()->id);
     }
 
     public function friends_invites()
     {
-        return $this->hasMany(FriendInvite::class);
+        return DB::table('users')
+            ->select(
+                'users.id',
+                'users.name',
+                'users.email',
+                'friends_invites.created_at'
+            )
+            ->join('friends_invites', 'friends_invites.invited_user_id', 'users.id')
+            ->where('friends_invites.user_id', '=', auth()->user()->id);
     }
 
     public function messages()
