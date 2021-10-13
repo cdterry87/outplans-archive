@@ -6,13 +6,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function invites()
+    public function account()
     {
-        return view('dashboard');
-    }
-
-    public function attended()
-    {
-        return view('dashboard');
+        //
     }
 }

@@ -23,12 +23,12 @@ class PlanAttendeeFactory extends Factory
      */
     public function definition()
     {
-        $status = ['G', 'N', 'M']; // G = Going, N = Not Going, or M = Maybe
+        $status = ['A', 'N', 'M']; // A = Attending, N = Not Attending, or M = Maybe
 
         return [
             'user_id' => User::factory(1)->create()->first(),
             'plan_id' => 1,
-            'status' => array_rand($status)
+            'status' => $status[array_rand($status)]
         ];
     }
 }
