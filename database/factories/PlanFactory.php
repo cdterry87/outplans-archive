@@ -24,10 +24,10 @@ class PlanFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'title' => $this->faker->text(),
-            'location' => $this->faker->text(),
+            'title' => ucwords($this->faker->words(rand(3, 5), true)),
+            'location' => ucwords($this->faker->words(rand(2, 4), true)),
             'description' => $this->faker->text(),
-            'when' => now(),
+            'when' => $this->faker->dateTimeBetween('+1 week', '+2 years'),
             'published' => now()
         ];
     }

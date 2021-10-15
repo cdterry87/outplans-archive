@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // For the guest account, create some plans
-        $guest->plans()->saveMany(Plan::factory()->count(5)->create([
+        $guest->plans()->saveMany(Plan::factory()->count(15)->create([
             'user_id' => $guest->id
         ])->each(function ($plan) use (&$guest) {
             // For each plan add some attendees...
