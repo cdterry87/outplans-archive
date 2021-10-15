@@ -6,11 +6,11 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FriendInvite extends Model
+class FriendRequest extends Model
 {
     use HasFactory;
 
-    protected $table = 'friends_invites';
+    protected $table = 'friends_requests';
 
     public function user()
     {

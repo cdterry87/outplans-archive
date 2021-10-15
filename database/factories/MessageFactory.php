@@ -26,7 +26,7 @@ class MessageFactory extends Factory
         return [
             'user_id' => 1,
             'plan_id' => 1,
-            'message' => $this->faker->text()
+            'text' => $this->faker->text()
         ];
     }
 }

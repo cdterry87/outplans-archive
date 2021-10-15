@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\FriendInvite;
+use App\Models\FriendRequest;
 use Illuminate\Database\Seeder;
 
-class FriendInviteSeeder extends Seeder
+class FriendRequestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class FriendInviteSeeder extends Seeder
      */
     public function run()
     {
-        FriendInvite::factory(10)->create();
+        FriendRequest::factory(10)->create();
     }
 }

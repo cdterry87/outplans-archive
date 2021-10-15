@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use App\Models\Plan;
 use App\Models\Friend;
 use App\Models\Message;
-use App\Models\FriendInvite;
+use App\Models\FriendRequest;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
@@ -103,7 +103,7 @@ class User extends Authenticatable
         return $this->hasMany(Friend::class);
     }
 
-    public function friends_invites()
+    public function friends_requests()
     {
         return $this->hasMany(Friend::class);
     }
@@ -121,30 +121,30 @@ class User extends Authenticatable
             ->where('friends.user_id', '=', auth()->user()->id);
     }
 
-    public function friends_invites_sent_with_details()
+    public function friends_requests_sent_with_details()
     {
         return DB::table('users')
             ->select(
                 'users.id',
                 'users.name',
                 'users.email',
-                'friends_invites.created_at'
+                'friends_requests.created_at'
             )
-            ->join('friends_invites', 'friends_invites.invited_user_id', 'users.id')
-            ->where('friends_invites.user_id', '=', auth()->user()->id);
+            ->join('friends_requests', 'friends_requests.requested_user_id', 'users.id')
+            ->where('friends_requests.user_id', '=', auth()->user()->id);
     }
 
-    public function friends_invites_received_with_details()
+    public function friends_requests_received_with_details()
     {
         return DB::table('users')
             ->select(
                 'users.id',
                 'users.name',
                 'users.email',
-                'friends_invites.created_at'
+                'friends_requests.created_at'
             )
-            ->join('friends_invites', 'friends_invites.invited_user_id', 'users.id')
-            ->where('friends_invites.invited_user_id', '=', auth()->user()->id);
+            ->join('friends_requests', 'friends_requests.requested_user_id', 'users.id')
+            ->where('friends_requests.requested_user_id', '=', auth()->user()->id);
     }
 
     public function messages()

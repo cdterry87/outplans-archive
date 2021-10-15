@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Friend;
-use App\Models\FriendInvite;
+use App\Models\FriendRequest;
 use App\Models\Message;
 use App\Models\Plan;
 use App\Models\PlanAttendee;
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
         ]));
 
         // And the guest should also have sent some friend invites
-        $guest->friends_invites()->saveMany(FriendInvite::factory()->count(5)->create([
+        $guest->friends_requests()->saveMany(FriendRequest::factory()->count(5)->create([
             'user_id' => $guest->id,
         ]));
     }
