@@ -9,30 +9,30 @@ class PlanController extends Controller
 {
     public function dashboard()
     {
-        $plans = auth()->user()->plans()->get();
-        $plans_invited = auth()->user()->plans_invited()->get();
+        $plans_upcoming = auth()->user()->plans_upcoming()->paginate(5);
+        $plans_invited = auth()->user()->plans_invited()->paginate(5);
 
-        return view('dashboard', compact(['plans', 'plans_invited']));
+        return view('dashboard', compact(['plans_upcoming', 'plans_invited']));
     }
 
     public function index()
     {
-        $plans = auth()->user()->plans()->get();
+        $plans = auth()->user()->plans()->paginate(10);
 
         return view('plans', compact(['plans']));
     }
 
     public function invites()
     {
-        $received = auth()->user()->plans_invited()->get();
-        $sent = auth()->user()->plans_invites()->get();
+        $received = auth()->user()->plans_invited()->paginate(10);
+        $sent = auth()->user()->plans_invites()->paginate(10);
 
         return view('invites', compact(['received', 'sent']));
     }
 
     public function attended()
     {
-        $attended = auth()->user()->plans_attended()->get();
+        $attended = auth()->user()->plans_attended()->paginate(10);
 
         return view('attended', compact(['attended']));
     }

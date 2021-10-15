@@ -53,14 +53,19 @@ class User extends Authenticatable
         return $this->hasMany(Plan::class);
     }
 
+    public function plans_upcoming()
+    {
+        return $this->hasMany(Plan::class)
+            ->where('plans.when', '>=', Carbon::now());
+    }
+
     public function plans_invites()
     {
         return DB::table('plans')
             ->select(
                 'plans.*',
                 'plans_invites.invited_user_id',
-                'users.name',
-                'users.email'
+                'users.name as sent_to'
             )
             ->join('plans_invites', 'plans_invites.plan_id', '=', 'plans.id')
             ->join('users', 'users.id', '=', 'plans_invites.invited_user_id')
@@ -80,12 +85,6 @@ class User extends Authenticatable
             ->where('plans_invites.invited_user_id', '=', auth()->user()->id);
     }
 
-    public function plans_upcoming()
-    {
-        // Get plans that I am invited to and the `when` date is in the future
-        // Join on attended table to display your attending status
-    }
-
     public function plans_attended()
     {
         return DB::table('plans')
@@ -101,6 +100,16 @@ class User extends Authenticatable
 
     public function friends()
     {
+        return $this->hasMany(Friend::class);
+    }
+
+    public function friends_invites()
+    {
+        return $this->hasMany(Friend::class);
+    }
+
+    public function friends_with_details()
+    {
         return DB::table('users')
             ->select(
                 'users.id',
@@ -112,7 +121,7 @@ class User extends Authenticatable
             ->where('friends.user_id', '=', auth()->user()->id);
     }
 
-    public function friends_invites()
+    public function friends_invites_sent_with_details()
     {
         return DB::table('users')
             ->select(
@@ -123,6 +132,19 @@ class User extends Authenticatable
             )
             ->join('friends_invites', 'friends_invites.invited_user_id', 'users.id')
             ->where('friends_invites.user_id', '=', auth()->user()->id);
+    }
+
+    public function friends_invites_received_with_details()
+    {
+        return DB::table('users')
+            ->select(
+                'users.id',
+                'users.name',
+                'users.email',
+                'friends_invites.created_at'
+            )
+            ->join('friends_invites', 'friends_invites.invited_user_id', 'users.id')
+            ->where('friends_invites.invited_user_id', '=', auth()->user()->id);
     }
 
     public function messages()
