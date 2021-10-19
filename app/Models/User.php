@@ -95,6 +95,7 @@ class User extends Authenticatable
             ->join('plans_attendees', 'plans_attendees.plan_id', '=', 'plans.id')
             ->where('plans_attendees.status', '=', 'A')
             ->where('plans_attendees.user_id', '=', auth()->user()->id)
+            ->where('plans.published', '!=', null)
             ->where('plans.when', '<', Carbon::now());
     }
 
@@ -143,7 +144,7 @@ class User extends Authenticatable
                 'users.email',
                 'friends_requests.created_at'
             )
-            ->join('friends_requests', 'friends_requests.requested_user_id', 'users.id')
+            ->join('friends_requests', 'friends_requests.user_id', 'users.id')
             ->where('friends_requests.requested_user_id', '=', auth()->user()->id);
     }
 
