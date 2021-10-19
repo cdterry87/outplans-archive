@@ -10,6 +10,7 @@ use App\Models\PlanAttendee;
 use App\Models\PlanInvite;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,12 @@ class DatabaseSeeder extends Seeder
         $guest = User::factory()->create([
             'name' => 'Guest',
             'email' => 'guest@example.com',
+        ]);
+
+        // Create a secondary user
+        $user = User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@example.com',
         ]);
 
         // For the guest account, create some plans
@@ -54,6 +61,44 @@ class DatabaseSeeder extends Seeder
         // And the guest should also have sent some friend invites
         $guest->friends_requests()->saveMany(FriendRequest::factory()->count(5)->create([
             'user_id' => $guest->id,
+        ]));
+
+        // Create plans, invites, attendees, and some messages for secondary user
+        $user->plans()->saveMany(Plan::factory()->count(5)->create([
+            'user_id' => $user->id,
+            'when' => Carbon::yesterday(),
+            'published' => Carbon::yesterday(),
+            'created_at' => Carbon::yesterday(),
+            'updated_at' => Carbon::yesterday()
+        ])->each(function ($plan) use (&$user, &$guest) {
+            // For each plan add the guest account as an attendee...
+            $plan->attendees()->save(PlanAttendee::factory()->create([
+                'status' => 'A',
+                'plan_id' => $plan->id,
+                'user_id' => $guest->id
+            ]));
+            // ...and send some a plan invite to the guest account
+            $plan->invites()->save(PlanInvite::factory()->create([
+                'user_id' => $user->id,
+                'invited_user_id' => $guest->id,
+                'plan_id' => $plan->id
+            ]));
+            // ...and finally display a message for this plan
+            $user->messages()->save(Message::factory()->create([
+                'user_id' => $user->id,
+                'plan_id' => $plan->id
+            ]));
+        }));
+
+        // The secondary user should have a friend
+        $guest->friends()->save(Friend::factory()->create([
+            'user_id' => $guest->id,
+        ]));
+
+        // And the secondary user should also have sent a friend request to the guest user
+        $user->friends_requests()->save(FriendRequest::factory()->create([
+            'user_id' => $user->id,
+            'requested_user_id' => $guest->id,
         ]));
     }
 }
