@@ -50,13 +50,14 @@ class User extends Authenticatable
 
     public function plans()
     {
-        return $this->hasMany(Plan::class);
+        return $this->hasMany(Plan::class)->orderBy('when');
     }
 
     public function plans_upcoming()
     {
         return $this->hasMany(Plan::class)
-            ->where('plans.when', '>=', Carbon::now());
+            ->where('plans.when', '>=', Carbon::now())
+            ->orderBy('when');
     }
 
     public function plans_invites()
@@ -69,7 +70,8 @@ class User extends Authenticatable
             )
             ->join('plans_invites', 'plans_invites.plan_id', '=', 'plans.id')
             ->join('users', 'users.id', '=', 'plans_invites.invited_user_id')
-            ->where('plans_invites.user_id', '=', auth()->user()->id);
+            ->where('plans_invites.user_id', '=', auth()->user()->id)
+            ->orderBy('when');
     }
 
     public function plans_invited()
@@ -79,10 +81,14 @@ class User extends Authenticatable
                 'plans.*',
                 'users.name as invited_by',
                 'plans_invites.user_id',
+                'plans_attendees.status'
             )
             ->join('plans_invites', 'plans_invites.plan_id', '=', 'plans.id')
+            ->leftJoin('plans_attendees', 'plans_attendees.plan_id', '=', 'plans.id')
             ->join('users', 'users.id', '=', 'plans_invites.user_id')
-            ->where('plans_invites.invited_user_id', '=', auth()->user()->id);
+            ->where('plans_invites.invited_user_id', '=', auth()->user()->id)
+            ->where('plans.when', '>=', Carbon::now())
+            ->orderBy('plans.when');
     }
 
     public function plans_attended()
@@ -96,7 +102,8 @@ class User extends Authenticatable
             ->where('plans_attendees.status', '=', 'A')
             ->where('plans_attendees.user_id', '=', auth()->user()->id)
             ->where('plans.published', '!=', null)
-            ->where('plans.when', '<', Carbon::now());
+            ->where('plans.when', '<', Carbon::now())
+            ->orderBy('plans.when', 'desc');
     }
 
     public function friends()
