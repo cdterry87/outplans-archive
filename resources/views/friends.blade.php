@@ -5,7 +5,7 @@
             <div class="w-full">
                 <div class="text-gray-900">
                     <div class="p-4 flex">
-                        <h2 class="text-2xl">Friends</h2>
+                        <h2 class="text-3xl">Friends</h2>
                     </div>
                     @if(count($friends) == 0)
                         <p class="text-center my-10">You do not currently have any friends.</p>
@@ -21,13 +21,13 @@
                                     @foreach ($friends as $friend)
                                         <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                             <td class="p-3 px-5">
-                                                <a href="/friend/{{ $friend->id }}">{{ $friend->name }}</a>
+                                                <a href="/users/{{ $friend->id }}" class="link">{{ $friend->name }}</a>
                                             </td>
                                             <td class="p-3 px-5">
                                                 {{ $friend->email }}
                                             </td>
                                             <td class="p-3 px-5">
-                                                {{ $friend->created_at }}
+                                                {{ Carbon\Carbon::parse($friend->created_at)->diffForHumans() }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -42,7 +42,7 @@
                 <div>
                     <div class="text-gray-900">
                         <div class="p-4 flex">
-                            <h2 class="text-2xl">Friend Requests Received</h2>
+                            <h2 class="text-3xl">Friend Requests Received</h2>
                         </div>
                         @if(count($invites_received) == 0)
                             <p class="text-center my-10">You have no pending friend requests.</p>
@@ -53,18 +53,18 @@
                                         <tr class="border-b text-white">
                                             <th class="text-left p-3 px-5">Name</th>
                                             <th class="text-left p-3 px-5">Email</th>
-                                            <th class="text-left p-3 px-5">Friends Since</th>
+                                            <th class="text-left p-3 px-5">Request Received</th>
                                         </tr>
                                         @foreach ($invites_received as $friend)
                                             <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                                 <td class="p-3 px-5">
-                                                    <a href="/friend/{{ $friend->id }}">{{ $friend->name }}</a>
+                                                    <a href="/users/{{ $friend->id }}" class="link">{{ $friend->name }}</a>
                                                 </td>
                                                 <td class="p-3 px-5">
                                                     {{ $friend->email }}
                                                 </td>
                                                 <td class="p-3 px-5">
-                                                    {{ $friend->created_at }}
+                                                    {{ Carbon\Carbon::parse($friend->created_at)->diffForHumans() }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -80,7 +80,7 @@
                 <div>
                     <div class="text-gray-900">
                         <div class="p-4 flex">
-                            <h2 class="text-2xl">Friend Requests Sent</h2>
+                            <h2 class="text-3xl">Friend Requests Sent</h2>
                         </div>
                         @if(count($invites_sent) == 0)
                             <p class="text-center my-10">You have not sent any friend requests.</p>
@@ -91,18 +91,18 @@
                                         <tr class="border-b text-white">
                                             <th class="text-left p-3 px-5">Name</th>
                                             <th class="text-left p-3 px-5">Email</th>
-                                            <th class="text-left p-3 px-5">Friends Since</th>
+                                            <th class="text-left p-3 px-5">Invite Sent</th>
                                         </tr>
                                         @foreach ($invites_sent as $friend)
                                             <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                                 <td class="p-3 px-5">
-                                                    <a href="/friend/{{ $friend->id }}">{{ $friend->name }}</a>
+                                                    <a href="/users/{{ $friend->id }}" class="link">{{ $friend->name }}</a>
                                                 </td>
                                                 <td class="p-3 px-5">
                                                     {{ $friend->email }}
                                                 </td>
                                                 <td class="p-3 px-5">
-                                                    {{ $friend->created_at }}
+                                                    {{ Carbon\Carbon::parse($friend->created_at)->diffForHumans() }}
                                                 </td>
                                             </tr>
                                         @endforeach

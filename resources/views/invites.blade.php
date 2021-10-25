@@ -5,7 +5,7 @@
             <div class="w-full">
                 <div class="text-gray-900">
                     <div class="p-4 flex">
-                        <h2 class="text-2xl">Received Invites</h2>
+                        <h2 class="text-3xl">Received Invites</h2>
                     </div>
                     @if(count($received) == 0)
                         <p class="text-center my-10">You do not have any received invites.</p>
@@ -22,7 +22,7 @@
                                     @foreach ($received as $plan)
                                         <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                             <td class="p-3 px-5">
-                                                <a href="/plan/{{ $plan->id }}">{{ $plan->title }}</a>
+                                                <a href="/plan/{{ $plan->id }}" class="link">{{ $plan->title }}</a>
                                             </td>
                                             <td class="p-3 px-5">
                                                 {{ $plan->location }}
@@ -31,7 +31,7 @@
                                                 {{ $plan->when }}
                                             </td>
                                             <td class="p-3 px-5">
-                                                {{ $plan->created_at }}
+                                                {{ Carbon\Carbon::parse($plan->created_at)->diffForHumans() }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -46,7 +46,7 @@
                 <div>
                     <div class="text-gray-900">
                         <div class="p-4 flex">
-                            <h2 class="text-2xl">Sent Invites</h2>
+                            <h2 class="text-3xl">Sent Invites</h2>
                         </div>
                         @if(count($sent) == 0)
                             <p class="text-center my-10">You do not have any sent invites.</p>
@@ -63,7 +63,7 @@
                                         @foreach ($sent as $plan)
                                             <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                                 <td class="p-3 px-5">
-                                                    <a href="/plan/{{ $plan->id }}">{{ $plan->title }}</a>
+                                                    <a href="/plan/{{ $plan->id }}" class="link">{{ $plan->title }}</a>
                                                 </td>
                                                 <td class="p-3 px-5">
                                                     {{ $plan->location }}

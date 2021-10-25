@@ -1,13 +1,17 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 .button {
-    @apply inline-block rounded-full w-auto px-8 py-4 font-bold border-gray-200 shadow-xl
+    @apply inline-block rounded-full w-auto px-8 py-4 font-bold border-gray-200 shadow-xl;
 }
 
 .button-black {
-    @apply bg-black text-white hover:bg-gray-800 hover:to-gray-100
+    @apply bg-black text-white hover:bg-gray-800 hover:to-gray-100;
+}
+
+.link {
+    @apply text-blue-700 hover:text-blue-800 font-bold;
 }

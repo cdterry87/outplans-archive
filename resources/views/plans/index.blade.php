@@ -4,8 +4,16 @@
             <x-sidebar />
             <div class="w-full">
                 <div class="text-gray-900">
-                    <div class="p-4 flex">
-                        <h2 class="text-2xl">My Plans</h2>
+                    <div class="p-4 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-3xl">My Plans</h2>
+                        </div>
+                        <div>
+                            <button class="button button-black">
+                                <i class="fas fa-plus-circle"></i>
+                                Create    
+                            </button>    
+                        </div>                    
                     </div>
                     @if(count($plans) == 0)
                         <p class="text-center my-10">You do not have any plans.</p>
@@ -22,7 +30,9 @@
                                     @foreach ($plans as $plan)
                                         <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                             <td class="p-3 px-5">
-                                                <a href="/plan/{{ $plan->id }}">{{ $plan->title }}</a>
+                                                <a href="/plans/{{ $plan->id }}" class="link">
+                                                    {{ $plan->title }}
+                                                </a>
                                             </td>
                                             <td class="p-3 px-5">
                                                 {{ $plan->location }}
