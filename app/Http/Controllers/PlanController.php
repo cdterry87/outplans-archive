@@ -19,7 +19,12 @@ class PlanController extends Controller
     {
         $plans = auth()->user()->plans()->paginate(10);
 
-        return view('plans', compact(['plans']));
+        return view('plans.index', compact(['plans']));
+    }
+
+    public function show(Plan $plan)
+    {
+        return view('plans.show', compact(['plan']));
     }
 
     public function invites()
