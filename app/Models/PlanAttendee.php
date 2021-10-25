@@ -16,4 +16,16 @@ class PlanAttendee extends Model
     {
         return $this->belongsTo(Plan::class);
     }
+
+    public function getStatusAttribute($value)
+    {
+        $status_types = [
+            '' => 'N/A',
+            'A' => 'Attending',
+            'N' => 'Not Attending',
+            'M' => 'Maybe',
+        ];
+
+        return $status_types[$value];
+    }
 }
