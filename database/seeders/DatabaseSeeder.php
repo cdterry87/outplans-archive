@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
     {
         // Create a guest account
         $guest = User::factory()->create([
-            'name' => 'Guest',
+            'name' => 'Guest Account',
             'email' => 'guest@example.com',
         ]);
 
         // Create a secondary user
         $user = User::factory()->create([
-            'name' => 'User',
+            'name' => 'User Account',
             'email' => 'user@example.com',
         ]);
 
@@ -63,29 +63,32 @@ class DatabaseSeeder extends Seeder
             'user_id' => $guest->id,
         ]));
 
-        // Create plans, invites, attendees, and some messages for secondary user
-        $user->plans()->saveMany(Plan::factory()->count(5)->create([
+        // Create plans in the past for secondary user and add the guest account as an attendee
+        $user->plans()->saveMany(Plan::factory()->count(3)->create([
             'user_id' => $user->id,
             'when' => Carbon::yesterday(),
             'published' => Carbon::yesterday(),
             'created_at' => Carbon::yesterday(),
             'updated_at' => Carbon::yesterday()
         ])->each(function ($plan) use (&$user, &$guest) {
-            // For each plan add the guest account as an attendee...
             $plan->attendees()->save(PlanAttendee::factory()->create([
                 'status' => 'A',
                 'plan_id' => $plan->id,
                 'user_id' => $guest->id
             ]));
-            // ...and send some a plan invite to the guest account
+        }));
+
+        // Create plans in the future for secondary user and send invites to the guest user
+        $user->plans()->saveMany(Plan::factory()->count(3)->create([
+            'user_id' => $user->id,
+            'when' => Carbon::now()->addYear(),
+            'published' => Carbon::yesterday(),
+            'created_at' => Carbon::yesterday(),
+            'updated_at' => Carbon::yesterday()
+        ])->each(function ($plan) use (&$user, &$guest) {
             $plan->invites()->save(PlanInvite::factory()->create([
                 'user_id' => $user->id,
                 'invited_user_id' => $guest->id,
-                'plan_id' => $plan->id
-            ]));
-            // ...and finally display a message for this plan
-            $user->messages()->save(Message::factory()->create([
-                'user_id' => $user->id,
                 'plan_id' => $plan->id
             ]));
         }));
